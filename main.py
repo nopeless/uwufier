@@ -26,23 +26,41 @@ def uwuify(strin:str, strength:float=0.5):
 		["wow", "wow<!>"],
 		["but", "but<!>"],
 		[",", "<=>"],
-		[".", "<=>"]
+		[".", "<END>"]
 	]
 	final_sub=[
 		["r","w"],
-		["R","w"]
+		["R","W"]
 	]
 
 	happy_emojis=["(. ❛ ᴗ ❛.)", "(◕ᴗ◕✿)", "( ꈍᴗꈍ)", "(≧▽≦)", "(✿^‿^)", "(◠‿・)—☆", ">///<", "^v^", "OwO", "UwU", "^///^", "^~^"]
 	light_weight_emojis=["Owo", "owo", "-w-", "^w^", "uwu", "UwU"]
 	delimed=strin.split(" ")
+	strin=""
 	for word in delimed:
 		if len(word) <= 3 and random.random() < 0.5:
 			word=word.upper()
+		elif len(word) > 7 and random.random() < 0.3:
+			word=word.upper()
+		else:
+			word=word.lower()
 		strin+=word+" "
+	delimed=strin.split("u")
+	strin=""
+	for stuff in delimed:
+		strin+=stuff+"u"
+		if random.random() < 0.2:
+			strin+="wu"
+	delimed=strin.split("o")
+	strin=""
+	for stuff in delimed:
+		strin+=stuff+"o"
+		if random.random() < 0.2:
+			strin+="wo"
 
 	for k in common_sub:
 		strin = strin.replace(k[0], k[1])
+	# print(strin)
 
 	while "<=>" in strin:
 		strin=strin.replace("<=>", f" {light_weight_emojis[random.randint(0, len(light_weight_emojis)-1)]} ", 1)
@@ -50,6 +68,8 @@ def uwuify(strin:str, strength:float=0.5):
 	while "<END>" in strin:
 		strin=strin.replace("<END>", f" {happy_emojis[random.randint(0, len(happy_emojis)-1)]} ", 1)
 
+	while "<!>" in strin:
+		strin=strin.replace("<!>", "!!1!")
 
 	for k in final_sub:
 		strin = strin.replace(k[0], k[1])
