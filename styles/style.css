@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'Arush Shiny';
+    src: url('fonts/Arush-Shiny/ArushShiny-1Gngj.ttf') format('truetype');
+    
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    width: 700px;
+    margin: 0 auto;
+    background-color: #99C1DE;
+}
+
+h1 {
+    font-family: 'Arush Shiny';
+    text-align: center;
+    color: #FAD2E1;
+    font-size: 100px;
+    font-weight: lighter;
+
+}
+
+form {
+    color: #FFF1E6;
+    text-align: center;
+}

@@ -1,9 +1,18 @@
 import random
+from bs4 import BeautifulSoup
+import re
+import urllib.request
+import platform
+import os
 
 # something else
 
 def uwuify(strin:str, strength:float=0.5):
-	# the main fuction 
+	# the main fuction
+
+	# if strength is 1 everything is owo uwu "w" @w@ .w. :3 ^w^
+	if strength == 1:
+		pass
 
 	common_sub=[
 		[" hi", " haii<END>"],
@@ -12,7 +21,7 @@ def uwuify(strin:str, strength:float=0.5):
 		["omg", "omg<!>"],
 		["wow...", "wow<sad>"],
 		["wow..", "wow<sad>"],
-		["wow", "wow<!>"],
+		[" wow ", "wow<!>"],
 		["but", "but<!>"],
 		[",", "<=>"],
 		[".", "<END>"]]
@@ -39,7 +48,7 @@ def uwuify(strin:str, strength:float=0.5):
 		if word == len(delimed)-1:
 			strin += delimed[word]
 		else:
-			strin+=delimed[word]+" "
+			strin += delimed[word]+" "
 
 	delimed=strin.split("u")
 	strin=""
@@ -79,14 +88,44 @@ def uwuify(strin:str, strength:float=0.5):
 		
 	return strin
 
+def url_to_str(url):
+	data = urllib.request.urlopen(url)
+
+	url_bytes = data.read()
+
+	doc = url_bytes.decode("utf8")
+
+	data.closed
+
+	return doc
+
+def uwuify_url(doc):
+	soup = BeautifulSoup(doc, 'html.parser')
+	uwu = ''
+
+	for tag in soup.find_all('p'):
+		uwu += uwuify(tag.get_text()) + '\n\n'
+
+	return uwu
+
 # epic fail
 if __name__ == "__main__":
 
-	print(uwuify("omg hi my name is Shaun, what's your name?"))
+	doc = url_to_str("https://en.wikipedia.org/wiki/Uwu_(emoticon)")
 
-	'''print(uwuify("""
-The Industrial Revolution, now also known as the First Industrial Revolution, was the transition to new manufacturing processes in Europe and the United States, in the period from about 1760 to sometime between 1820 and 1840. This transition included going from hand production methods to machines, new chemical manufacturing and iron production processes, the increasing use of steam power and water power, the development of machine tools and the rise of the mechanized factory system. The Industrial Revolution also led to an unprecedented rise in the rate of population growth.
+	uwu = uwuify_url(doc).strip()
 
-Textiles were the dominant industry of the Industrial Revolution in terms of employment, value of output and capital invested. The textile industry was also the first to use modern production methods.
-"""))'''
+	# open a new txt file and write uwu into it
+	with open("hehe.txt", "w") as text:
+		print(uwu, file=text)
+
+	# open txt file
+	# TODO: make it open url to uwuey page!
+	if platform.system() == "Linux":
+		os.system("xdg-open hehe.txt")
+	# TODO: add windows option
+	if platform.system() == "Windows":
+		pass
+
+	# TODO: insert text into a body, then open webpage
 	
